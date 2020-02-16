@@ -1,30 +1,39 @@
 import React, { Component} from 'react';
+import axios from 'axios';
+import Movies from '../Movie/Movies';
 
 class Home extends Component {
+    state = {
+        popular : []
+    }
+
+    componentDidMount = () => {
+        const key = '289ceb9c9f5fe2b134e1433ef8599082'
+        const movieArray = []
+        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`)
+        .then(res => {
+            res.data.results.forEach(item => {
+                item.poster_src = "https://image.tmdb.org/t/p/w185" + item.poster_path
+                movieArray.push(item)
+            })
+            this.setState({ popular: movieArray })
+        })
+    }
+
     render () {
         return (
-            <>
-            <header class="jumbotron my-4">
-                <h1 class="display-3">Start Movies</h1>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-                <a href="a" class="btn btn-primary btn-lg">Call to action!</a>
-            </header>
-
-            <div class="row text-center">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                    <img class="card-img-top" src="http://placehold.it/500x325" alt="" />
-                    <div class="card-body">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="a" class="btn btn-primary">Find Out More!</a>
-                    </div>
-                    </div>
-                </div>
+            <div className="d-flex justify-content-start">
+            {/* <header className="jumbotron my-4">
+                <h1 className="display-3">Start Movies</h1>
+                <p className="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+                <a href="a" className="btn btn-primary btn-lg">Call to action!</a>
+            </header> */}
+            { this.state.popular.map(item => (
+                
+                <Movies movie={ item } />
+            ))}
+                
             </div>
-            </>
         )
     }
 }
