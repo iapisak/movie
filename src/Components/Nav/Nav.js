@@ -13,18 +13,18 @@ class Navbar extends Component {
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="a">Home
+                        <a class="nav-link" href="/">Home
                         <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="a">About</a>
+                        <a class="nav-link" href="a">Search</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="a">Services</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="a">Contact</a>
+                        <a class="nav-link" href="a">Help</a>
                     </li>
                     </ul>
                 </div>
