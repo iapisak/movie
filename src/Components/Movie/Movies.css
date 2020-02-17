@@ -1,0 +1,23 @@
+.containers {
+    margin-top: 20px;
+    display: flex;
+    overflow-x: scroll;
+  }
+  
+.item {
+    text-align: center;
+    margin: 0 2px;
+    transition: transform 300ms ease 100ms;
+}
+
+.container:hover .item {
+    transform: translateX(-5%);
+}
+
+.item:hover ~ .item {
+    transform: translateX(5%);
+}
+
+.item:hover {
+    transform: scale(0.94) !important;
+}
