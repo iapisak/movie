@@ -18,6 +18,9 @@ class Navbar extends Component {
                             </a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="/movie_tvshow">Movies/TvShows</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="a">Search</a>
                         </li>
                         <li className="nav-item">

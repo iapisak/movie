@@ -14,22 +14,32 @@ class Home extends Component {
     }
 
     componentDidMount = () => {
-        const api_key = '289ceb9c9f5fe2b134e1433ef8599082'
+        const api_key = process.env.REACT_APP_API_KEY
         this.nowPlaying(api_key)
         this.tvShow(api_key)
     }
 
     nowPlaying = (key) => {
-        axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US&page=1`)
+        const movies = []
+        axios.get(`${process.env.REACT_APP_API_URL}/movie/now_playing?api_key=${ key }&language=en-US&page=1`)
         .then(res => {
-            this.setState({ nowPlaying: res.data.results, currentMovie: res.data.results[0] })
+            res.data.results.forEach(item => {
+                item.poster = 'https://image.tmdb.org/t/p/w400' + item.poster_path
+                movies.push(item)
+            })
+            this.setState({ nowPlaying: movies, currentMovie: movies[0] })
         })
     }
 
     tvShow = (key) => {
-        axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`)
+        const tv = []
+        axios.get(`${process.env.REACT_APP_API_URL}/tv/popular?api_key=${ key }&language=en-US&page=1`)
         .then(res => {
-            this.setState({ tvShow: res.data.results, currentTvShow: res.data.results[0] })
+            res.data.results.forEach(item => {
+                item.poster = 'https://image.tmdb.org/t/p/w400' + item.poster_path
+                tv.push(item)
+            })
+            this.setState({ tvShow: tv, currentTvShow: tv[0] })
         })
     }
 
@@ -44,13 +54,13 @@ class Home extends Component {
         return ( 
             <div>
                 <h1>Popolar Movies on Star Movie</h1>
-                <div className="content jumbotron p-4 p-md-5 text-white rounded bg-dark">
+                <div className="content d-flex jumbotron p-4 p-md-5 text-white rounded bg-dark" 
+                     style={{ backgroundImage: `url('${this.state.currentMovie.poster}')` }} >
                     <div className="px-0">
                         <h3 className="font-italic">{ this.state.currentMovie.title }</h3>
                         <p>{ this.state.currentMovie.overview }</p>
                     </div>
                 </div>
-
                 <div className="containers">
                     { this.state.nowPlaying.map(item => (
                         <Movies 
@@ -58,10 +68,12 @@ class Home extends Component {
                             movie = { item } 
                             setMovie = { this.setCurrentMovie } />
                     ))}
+                    <div className="item">see All</div>
                 </div>
 
                 <h1>TV show</h1>
-                <div className="content jumbotron p-4 p-md-5 text-white rounded bg-dark">
+                <div className="content jumbotron p-4 p-md-5 text-white rounded bg-dark"
+                     style={{ backgroundImage: `url('${this.state.currentTvShow.poster}')` }} >
                     <div className="px-0">
                         <h3 className="font-italic">{ this.state.currentTvShow.name }</h3>
                         <p>{ this.state.currentTvShow.overview }</p>

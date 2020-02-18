@@ -1,39 +1,38 @@
 .content {
-    /* margin-top: 20px; */
-    height: 250px;
+    margin-top: 40px;
+    height: 300px;
     position: relative;
-}
+  }
   
-.background {
+  .background {
     display: flex;
     height: 100%;
-}
+  }
   
-.left {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    
-    width: 20%;
+  .left {
+    background: black;
+    width: 30%;
     position: relative;
-}
+  }
   
-.left:before {
+  .left:before {
     content: '';
     position: absolute;
-    background-image: linear-gradient(to left,#000,transparent);
+    background-image: linear-gradient(to right,#000,transparent);
     top: 0;
     bottom: 0;
     left: 100%;
-    width: 200px;
-}
+    width: 275px;
+  }
   
-.right {
-    background: black;
-    width: 80%;
-}
+  .right {
+    background: green;
+    background-size: cover;
+    width: 70%;
+    height: 30%;
+  }
   
-.content-container {
+  .content-container {
     color: white;
     position: absolute;
     top: 0;
@@ -41,4 +40,4 @@
     right: 0;
     bottom: 0;
     padding: 30px
-}
+  }
