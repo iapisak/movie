@@ -24,7 +24,7 @@ class Home extends Component {
         axios.get(`${process.env.REACT_APP_API_URL}/movie/now_playing?api_key=${ key }&language=en-US&page=1`)
         .then(res => {
             res.data.results.forEach(item => {
-                item.poster = 'https://image.tmdb.org/t/p/w400' + item.poster_path
+                item.poster = 'https://image.tmdb.org/t/p/w500' + item.poster_path
                 movies.push(item)
             })
             this.setState({ nowPlaying: movies, currentMovie: movies[0] })
@@ -54,11 +54,14 @@ class Home extends Component {
         return ( 
             <div>
                 <h1>Popolar Movies on Star Movie</h1>
-                <div className="content d-flex jumbotron p-4 p-md-5 text-white rounded bg-dark" 
-                     style={{ backgroundImage: `url('${this.state.currentMovie.poster}')` }} >
-                    <div className="px-0">
-                        <h3 className="font-italic">{ this.state.currentMovie.title }</h3>
-                        <p>{ this.state.currentMovie.overview }</p>
+                <div className="content">
+                    <div className="background">
+                    <div className="left"></div>
+                    <div className="right" style={{ backgroundImage: `url('${this.state.currentMovie.poster}')` }} ></div>
+                    </div>
+                    <div className="content-container">
+                        <h3 className="font-italic text-uppercase">{ this.state.currentMovie.title }</h3>
+                        { this.state.currentMovie.overview }
                     </div>
                 </div>
                 <div className="containers">
@@ -72,11 +75,14 @@ class Home extends Component {
                 </div>
 
                 <h1>TV show</h1>
-                <div className="content jumbotron p-4 p-md-5 text-white rounded bg-dark"
-                     style={{ backgroundImage: `url('${this.state.currentTvShow.poster}')` }} >
-                    <div className="px-0">
-                        <h3 className="font-italic">{ this.state.currentTvShow.name }</h3>
-                        <p>{ this.state.currentTvShow.overview }</p>
+                <div className="content">
+                    <div className="background">
+                        <div className="left"></div>
+                        <div className="right" style={{ backgroundImage: `url('${this.state.currentTvShow.poster}')` }} ></div>
+                    </div>
+                    <div className="content-container">
+                        <h3 className="font-italic text-uppercase">{ this.state.currentTvShow.name }</h3>
+                        { this.state.currentTvShow.overview }
                     </div>
                 </div>
                 <div className="containers">
